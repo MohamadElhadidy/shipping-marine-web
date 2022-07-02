@@ -6,7 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>معدلات عملية الشحن</title>
     <link rel="stylesheet" href="https://cdn.datatables.net/1.11.3/css/jquery.dataTables.min.css">
-
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css" />
     <script src="https://js.pusher.com/7.0/pusher.min.js"></script>
     <script>
         Pusher.logToConsole = true;
@@ -222,18 +222,37 @@
 </head>
 
 <body>
+    {{-- <input type="text" name="datetimes" id="datetimes"  readonly/> --}}
     <div class="wrapper" id="wrapper"></div>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
     <script src="https://cdn.datatables.net/1.11.3/js/jquery.dataTables.min.js"></script>
     <script src="https://cdn.datatables.net/1.11.3/js/dataTables.bootstrap.min.js"></script>
     <script src="https://cdn.datatables.net/responsive/2.2.9/js/dataTables.responsive.min.js"></script>
     <script src="https://cdn.datatables.net/responsive/2.2.9/js/responsive.bootstrap.min.js"></script>
+          <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>
     <script>
+        
         $(document).ready(function() {
-            loadData()
+//                     $(function() {
+//   $('input[name="datetimes"]').daterangepicker({
+//     timePicker:true,
+//     timePicker24Hour: true,
+//     opens: 'center',
+//     startDate: moment().startOf('day').subtract(10, 'day'),
+//     endDate: moment().startOf('day').add(10, 'day'),
+//     locale: {
+//         format: 'Y-MM-DD H:mm:00',
+//         applyLabel: "موافق",
+//         cancelLabel: "إلغاء",
+//     }
+//     });
+// })
+            loadData();
         });
 
-        function loadData() {
+        function loadData(datetimes) {
+            // var datetimes =  $( "#datetimes" ).val();
             $('#wrapper').load('/DStats/' + JSON.parse("{{ json_encode($vessel->vessel_id) }}"));
         }
         var Pchannel = pusher.subscribe('stats');
